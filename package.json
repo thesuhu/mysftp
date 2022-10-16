@@ -1,0 +1,27 @@
+{
+  "name": "mysftp",
+  "version": "1.0.0",
+  "description": "Work with FTP easily.",
+  "main": "mysftp.js",
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thesuhu/mysftp.git"
+  },
+  "keywords": [
+    "sftp",
+    "ssh2"
+  ],
+  "author": "thesuhu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thesuhu/mysftp/issues"
+  },
+  "homepage": "https://github.com/thesuhu/mysftp#readme",
+  "dependencies": {
+    "@thesuhu/colorconsole": "^1.0.5",
+    "ssh2-sftp-client": "^9.0.4"
+  }
+}
