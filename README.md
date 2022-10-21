@@ -130,7 +130,7 @@ let retval = uploadfile(localFile, remoteFile, true)
 Below is an example of getting a list of directories on the SFTP server.
 
 ```js
-let retval = await list('/')
+let retval = await list('/') // parameters available: remoteDir, config
 console.log(retval)
 ```
 
