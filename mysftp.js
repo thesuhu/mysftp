@@ -134,6 +134,38 @@ exports.downloadfile = async (localFile, remoteFile, isFast, config) => {
     }
 }
 
+exports.copyfile = async (sourceFile, destFile, config) => {
+    let sftpconfig = config ? config : sftpconfig_default;
+    let sftp = new Client();
+    try {
+        await sftp.connect(sftpconfig);
+        await sftp.rcopy(sftpconfig.root_dir + sourceFile, sftpconfig.root_dir + destFile)
+        sftp.end()
+        logConsole('Copy file successful')
+        return { message: 'Copy file successful' }
+    } catch (err) {
+        sftp.end()
+        errorConsole(err.message)
+        return { message: err.message }
+    }
+}
+
+exports.deletefile = async (remoteFile, noError, config) => {
+    let sftpconfig = config ? config : sftpconfig_default;
+    let sftp = new Client();
+    try {
+        await sftp.connect(sftpconfig);
+        await sftp.delete(sftpconfig.root_dir + remoteFile, noError)
+        sftp.end()
+        logConsole('Delete file successful')
+        return { message: 'Delete file successful' }
+    } catch (err) {
+        sftp.end()
+        errorConsole(err.message)
+        return { message: err.message }
+    }
+}
+
 async function ensureDir(remoteDir, sftp) {
     try {
         // check if remote dir exists

@@ -42,7 +42,7 @@ const fileupload = require('express-fileupload')
 app.use(fileupload())
 ```
 
-then the following module will work fine. 
+then the following module will work fine.
 
 ```js
 const { uploadstream } = require('mysftp')
@@ -59,6 +59,7 @@ router.post('/upload', async (req, res) => {
     res.send(retval.message) // retval.message will be "Upload successful" if no error
 })
 ```
+
 Below is an example multiple file upload using method `POST` and headers `Content-Type: multipart/form-data`. In this example using `express` framework, so requires package `express-fileupload` and add this line in `app.js/index.js`.
 
 ```js
@@ -66,7 +67,7 @@ const fileupload = require('express-fileupload')
 app.use(fileupload())
 ```
 
-then the following module will work fine. 
+then the following module will work fine.
 
 ```js
 const { multiuploadstream } = require('mysftp')
@@ -130,13 +131,44 @@ let retval = uploadfile(localFile, remoteFile, true)
 Below is an example of getting a list of directories on the SFTP server.
 
 ```js
+const { list } = require('mysftp')
+
 let retval = await list('/') // parameters available: remoteDir, config
 console.log(retval)
 ```
 
-If you find this useful, please ⭐ the repository. Any feedback is welcome. 
+Below is an example of copying remote file into another remote file on the SFTP server.
 
-You can contribute or you want to, feel free to [__Buy me a coffee! :coffee:__](https://saweria.co/thesuhu), I will be really thankfull for anything even if it is a coffee or just a kind comment towards my work, because that helps me a lot.
+```js
+const { copyfile } = require('mysftp')
+
+let sourceFile = '/test.txt'
+let destFile = '/another_test.txt'
+let retval = copyfile(sourceFile, destFile) // parameter avaliable: sourceFile, destFile, config
+console.log(retval.message) // retval.message will be "Copy file successful" if no error
+```
+
+Below is an example of deleting remote file on the SFTP server.
+
+```js
+const { deletefile } = require('mysftp')
+
+let remoteFile = '/test.txt'
+let retval = deletefile(remoteFile) // parameter avaliable: remoteFile, noError, config
+console.log(retval.message) // retval.message will be "Delete file successful" if no error
+```
+
+By default, an error will occur when the remote file does not exist. You can pass `noError`parameter set to `true` if you don't want raise the error.
+
+```js
+let retval = deletefile(remoteFile, true)
+```
+
+That's all.
+
+If you find this useful, please ⭐ the repository. Any feedback is welcome.
+
+You can contribute or you want to, feel free to [**Buy me a coffee! :coffee:**](https://saweria.co/thesuhu), I will be really thankfull for anything even if it is a coffee or just a kind comment towards my work, because that helps me a lot.
 
 ## License
 
